@@ -47,11 +47,11 @@ class base {
       // following code is for health bar
       noStroke();
       fill(255,0,0);
-      rect(x - 490, y + 510, drawWidth, 20);
+      rect(x - 10, y + 510, drawWidth, 20);
       // Outline
       stroke(0);
       noFill();
-      rect(x - 490, y + 510, w, 20);
+      rect(x - 10, y + 510, w, 20);
     }
   }
 
