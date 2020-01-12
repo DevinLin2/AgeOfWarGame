@@ -19,8 +19,11 @@ void initialize() {
 
 void draw() {
   PImage background1 = loadImage("medievalBackground");
+  PImage toolBar = loadImage("toolBar");
   background1.resize(1800,1000);
   background(background1);
+  image(toolBar, 0, 0, 1800, 100);
+  image(toolBar, 0, 950, 1800, 50);
   for (int i = 0 ; i < bases.size(); i++) {
     bases.get(i).display();
   }
