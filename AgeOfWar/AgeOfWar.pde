@@ -7,6 +7,7 @@ ArrayList<melee> enemyUnits;
 ArrayList<icon> icons;
 PImage background1, toolBar;
 float playerHealth, enemyHealth;
+long lastTime;
 
 void setup() {
   frameRate(20);
@@ -38,7 +39,7 @@ void initialize() {
 }
 
 void draw() {
-  println(frameRate);
+  //println(frameRate);
   background(background1);
 
   // all draw code goes under this
@@ -67,6 +68,7 @@ void draw() {
     if (playerUnits.get(i).getHealth() <= 0) {
       playerUnits.remove(i);
       i--;
+      population--;
     }
   }
   for (int i = 0; i < enemyUnits.size(); i++) {
@@ -76,9 +78,15 @@ void draw() {
     enemyUnits.get(i).attack();
     if (enemyUnits.get(i).getHealth() <= 0) {
       enemyUnits.remove(i);
-      i--;
-      population--;
       experience += 100;
+      gold += enemyUnits.get(i).getCost();
+    }
+  }
+  if (millis() - lastTime >= 5000) {
+    int index = (int) Math.random() * 4;
+    if (index == 0) {
+      enemyUnits.add(new melee(1200, 700, 100, 100, 200, "enemy", "knight", 1.5, 110, 15, 140));
+      lastTime = millis();
     }
   }
 }
@@ -94,21 +102,21 @@ void mousePressed() {
     }
     if (mouseX <= 190 && mouseX >= 115 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 110) {
-        playerUnits.add(new melee(245, 725, 70, 70, 2, "player", "fairy", 2.5, 200, 25, 110));
+        playerUnits.add(new melee(245, 725, 70, 70, 200, "player", "fairy", 2.5, 200, 25, 110));
         population++;
         gold -= 110;
       }
     }
     if (mouseX <= 275 && mouseX >= 200 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 500) {
-        playerUnits.add(new melee(375, 650, 200, 150, 2, "player", "dragon", 1, 300, 30, 500));
+        playerUnits.add(new melee(375, 650, 200, 150, 200, "player", "dragon", 1, 300, 30, 500));
         population++;
         gold -= 500;
       }
     }
     if (mouseX <= 360 && mouseX >= 285 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 220) {
-        playerUnits.add(new melee(220, 700, 100, 100, 2, "player", "wizard", 1.5, 140, 40, 220));
+        playerUnits.add(new melee(220, 700, 100, 100, 200, "player", "wizard", 1.5, 140, 40, 220));
         population++;
         gold -= 220;
       }
@@ -116,28 +124,28 @@ void mousePressed() {
   } else {
     if (mouseX <= 105 && mouseX >= 30 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 120) {
-        playerUnits.add(new melee(330, 700, 120, 120, 2, "player", "spider", 2.5, 150, 20, 120));
+        playerUnits.add(new melee(330, 700, 120, 120, 200, "player", "spider", 2.5, 150, 20, 120));
         population++;
         gold -= 120;
       }
     }
     if (mouseX <= 190 && mouseX >= 115 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 150) {
-        playerUnits.add(new melee(330, 700, 100, 100, 2, "player", "robot", 1.5, 235, 30, 150));
+        playerUnits.add(new melee(330, 700, 100, 100, 200, "player", "robot", 1.5, 235, 30, 150));
         population++;
         gold -= 150;
       }
     }
     if (mouseX <= 275 && mouseX >= 200 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 200) {
-        playerUnits.add(new melee(230, 700, 100, 100, 2, "player", "alien", 1.5, 350, 40, 200));
+        playerUnits.add(new melee(230, 700, 100, 100, 200, "player", "alien", 1.5, 350, 40, 200));
         population++;
         gold -= 200;
       }
     }
     if (mouseX <= 360 && mouseX >= 285 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 800) {
-        playerUnits.add(new melee(350, 650, 150, 150, 2, "player", "thanos", 1, 9999, 100, 800));
+        playerUnits.add(new melee(350, 650, 150, 150, 200, "player", "thanos", 1, 9999, 100, 800));
         population++;
         gold -= 800;
       }

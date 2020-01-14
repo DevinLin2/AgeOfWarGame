@@ -24,11 +24,11 @@ class melee {
     index = -1;
     cost = c;
   }
-  
+
   int getCost() {
     return cost;
   }
-  
+
   float getX() {
     return x;
   }
@@ -40,15 +40,15 @@ class melee {
   float getHealth() {
     return currentHealth;
   }
-  
+
   float getWidth() {
     return w;
   }
-  
+
   void setHealth(float newHP) {
     currentHealth = newHP;
   }
-  
+
   void setIndex(int newIndex) {
     index = newIndex;
   }
@@ -71,7 +71,22 @@ class melee {
 
   void display() {
     float drawWidth = (currentHealth / healthTotal) * w; // this scales the current healthbar to the width of the base
-    if (party.equals("player") && !imgName.equals("knight") && !imgName.equals("fairy") && !imgName.equals("wizard") && !imgName.equals("alien")) {
+    if (party.equals("player") && !imgName.equals("dragon")) {
+      image(img, x, y, w, h);
+      noStroke();
+      if (currentHealth >= healthTotal / 3 * 2) {
+        fill(90, 255, 90);
+      } else if (currentHealth >= healthTotal / 3) {
+        fill(255, 255, 52);
+      } else {
+        fill(255, 51, 51);
+      }
+      rect(x + w / 4, y - 10, drawWidth / 2, 10);
+      // Outline
+      stroke(0);
+      noFill();
+      rect(x + w / 4, y - 10, w / 2, 10);
+    } else {
       scale(-1.0, 1.0);
       image(img, -x, y, w, h);
       scale(-1.0, 1.0);
@@ -88,21 +103,6 @@ class melee {
       stroke(0);
       noFill();
       rect(x - 3 * w / 4, y - 10, w / 2, 10);
-    } else {
-      image(img, x, y, w, h);
-      noStroke();
-      if (currentHealth >= healthTotal / 3 * 2) {
-        fill(90, 255, 90);
-      } else if (currentHealth >= healthTotal / 3) {
-        fill(255, 255, 52);
-      } else {
-        fill(255, 51, 51);
-      }
-      rect(x + w / 4, y - 10, drawWidth / 2, 10);
-      // Outline
-      stroke(0);
-      noFill();
-      rect(x + w / 4, y - 10, w / 2, 10);
     }
   }
 
