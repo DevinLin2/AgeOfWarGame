@@ -53,6 +53,10 @@ class melee {
     index = newIndex;
   }
 
+  void changeIsAttacking() {
+    isAttacking = false;
+  }
+
   void move() {
     if (party.equals("player") && isAttacking == false) {
       if (index != 0 && dist(playerUnits.get(index - 1).getX(), playerUnits.get(index - 1).getY(), x, y) >= playerUnits.get(index - 1).getWidth() + 10) {
@@ -87,22 +91,39 @@ class melee {
       noFill();
       rect(x + w / 4, y - 10, w / 2, 10);
     } else {
-      scale(-1.0, 1.0);
-      image(img, -x, y, w, h);
-      scale(-1.0, 1.0);
-      noStroke();
-      if (currentHealth >= healthTotal / 3 * 2) {
-        fill(90, 255, 90);
-      } else if (currentHealth >= healthTotal / 3) {
-        fill(255, 255, 52);
+      if (party.equals("enemy") && imgName.equals("dragon")) {
+        image(img, x, y, w, h);
+        noStroke();
+        if (currentHealth >= healthTotal / 3 * 2) {
+          fill(90, 255, 90);
+        } else if (currentHealth >= healthTotal / 3) {
+          fill(255, 255, 52);
+        } else {
+          fill(255, 51, 51);
+        }
+        rect(x + w / 4, y - 10, drawWidth / 2, 10);
+        // Outline
+        stroke(0);
+        noFill();
+        rect(x + w / 4, y - 10, w / 2, 10);
       } else {
-        fill(255, 51, 51);
+        scale(-1.0, 1.0);
+        image(img, -x, y, w, h);
+        scale(-1.0, 1.0);
+        noStroke();
+        if (currentHealth >= healthTotal / 3 * 2) {
+          fill(90, 255, 90);
+        } else if (currentHealth >= healthTotal / 3) {
+          fill(255, 255, 52);
+        } else {
+          fill(255, 51, 51);
+        }
+        rect(x - 3 * w / 4, y - 10, drawWidth / 2, 10);
+        // Outline
+        stroke(0);
+        noFill();
+        rect(x - 3 * w / 4, y - 10, w / 2, 10);
       }
-      rect(x - 3 * w / 4, y - 10, drawWidth / 2, 10);
-      // Outline
-      stroke(0);
-      noFill();
-      rect(x - 3 * w / 4, y - 10, w / 2, 10);
     }
   }
 
@@ -122,6 +143,30 @@ class melee {
           isAttacking = true;
           if (frameCount % 20 == 0) {
             playerUnits.get(i).setHealth(playerUnits.get(i).getHealth() - damage);
+          }
+        }
+      }
+    }
+  }
+
+  void attackBase() {
+    if (party.equals("player")) {
+      for (int i = 0; i < bases.size(); i++) {
+        if (1500 - x <= range) {
+          isAttacking = true;
+          if (frameCount % 20 == 0) {
+            bases.get(1).setHealth(bases.get(1).getHealth() - damage);
+            enemyHealth -= damage;
+          }
+        }
+      }
+    } else {
+      for (int i = 0; i < bases.size(); i++) {
+        if (x - 290 <= range) {
+          isAttacking = true;
+          if (frameCount % 20 == 0) {
+            bases.get(0).setHealth(bases.get(0).getHealth() - damage);
+            playerHealth -= damage;
           }
         }
       }
