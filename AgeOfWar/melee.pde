@@ -86,8 +86,7 @@ class melee {
         if (dist(playerUnits.get(i).getX(), playerUnits.get(i).getY(), x, y) <= range) {
           isAttacking = true;
           if (frameCount % 20 == 0) {
-            
-          playerUnits.get(i).setHealth(playerUnits.get(i).getHealth() - damage);
+            playerUnits.get(i).setHealth(playerUnits.get(i).getHealth() - damage);
           }
         }
       }
