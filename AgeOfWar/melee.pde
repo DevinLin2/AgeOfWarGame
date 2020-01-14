@@ -5,9 +5,9 @@ class melee {
   PImage img;
   boolean isAttacking;
   String party, imgName;
-  int index;
+  int index, cost;
 
-  melee(float xPos, float yPos, float wid, float hei, float r, String p, String name, float speed, float hp, float d) {
+  melee(float xPos, float yPos, float wid, float hei, float r, String p, String name, float speed, float hp, float d, int c) {
     x = xPos;
     y = yPos;
     w = wid;
@@ -22,8 +22,13 @@ class melee {
     currentHealth = healthTotal;
     damage = d;
     index = -1;
+    cost = c;
   }
-
+  
+  int getCost() {
+    return cost;
+  }
+  
   float getX() {
     return x;
   }
@@ -66,7 +71,7 @@ class melee {
 
   void display() {
     float drawWidth = (currentHealth / healthTotal) * w; // this scales the current healthbar to the width of the base
-    if (party.equals("player")) {
+    if (party.equals("player") && !imgName.equals("knight") && !imgName.equals("fairy") && !imgName.equals("wizard") && !imgName.equals("alien")) {
       scale(-1.0, 1.0);
       image(img, -x, y, w, h);
       scale(-1.0, 1.0);

@@ -75,4 +75,8 @@ class base {
   void setHealth(float newHP) {
     currentHealth = newHP;
   }
+  
+  float getHealth() {
+    return currentHealth;
+  }
 }
