@@ -75,7 +75,7 @@ class melee {
 
   void display() {
     float drawWidth = (currentHealth / healthTotal) * w; // this scales the current healthbar to the width of the base
-    if (party.equals("player") && !imgName.equals("dragon")) {
+    if (party.equals("player") && (!imgName.equals("dragon") && !imgName.equals("robot") && !imgName.equals("spider") && !imgName.equals("thanos"))) {
       image(img, x, y, w, h);
       noStroke();
       if (currentHealth >= healthTotal / 3 * 2) {
@@ -91,7 +91,7 @@ class melee {
       noFill();
       rect(x + w / 4, y - 10, w / 2, 10);
     } else {
-      if (party.equals("enemy") && imgName.equals("dragon")) {
+      if (party.equals("enemy") && (imgName.equals("dragon") || imgName.equals("spider") || imgName.equals("robot"))) {
         image(img, x, y, w, h);
         noStroke();
         if (currentHealth >= healthTotal / 3 * 2) {

@@ -20,7 +20,7 @@ void initialize() {
   toolBar = loadImage("toolBar");
   background1.resize(1800, 1000);
   level = 1;
-  experience = 0;
+  experience = 1000;
   population = 0;
   gold = 1000;
   enemyPop = 0;
@@ -45,7 +45,7 @@ void draw() {
   background(background1);
 
   // all draw code goes under this
-  
+
   image(toolBar, 0, 0, 1800, 100);
   textSize(20);
   fill(255);
@@ -90,26 +90,45 @@ void draw() {
     }
   }
   if (millis() - lastTime >= 8000 && enemyPop < 5) {
-    int index = (int) (Math.random() * 4);
-    if (index == 0) {
-      enemyUnits.add(new melee(1600, 700, 100, 100, 150, "enemy", "knight", 1.5, 110, 15, 140));
-      lastTime = millis();
-      enemyPop++;
-    }
-    if (index == 1) {
-      enemyUnits.add(new melee(1560, 725, 70, 70, 150, "enemy", "fairy", 25, 200, 15, 110));
-      lastTime = millis();
-      enemyPop++;
-    }
-    if (index == 2) {
-      enemyUnits.add(new melee(1430, 650, 200, 150, 150, "enemy", "dragon", 1, 300, 30, 500));
-      lastTime = millis();
-      enemyPop++;
-    }
-    if (index == 3) {
-      enemyUnits.add(new melee(1580, 700, 100, 100, 150, "enemy", "wizard", 1.5, 140, 40, 220));
-      lastTime = millis();
-      enemyPop++;
+    if (level == 1) {
+      int index = (int) (Math.random() * 4);
+      if (index == 0) {
+        enemyUnits.add(new melee(1600, 700, 100, 100, 150, "enemy", "knight", 1.5, 110, 15, 140));
+        lastTime = millis();
+        enemyPop++;
+      }
+      if (index == 1) {
+        enemyUnits.add(new melee(1560, 725, 70, 70, 150, "enemy", "fairy", 2.5, 200, 15, 110));
+        lastTime = millis();
+        enemyPop++;
+      }
+      if (index == 2) {
+        enemyUnits.add(new melee(1430, 650, 200, 150, 150, "enemy", "dragon", 1, 300, 30, 500));
+        lastTime = millis();
+        enemyPop++;
+      }
+      if (index == 3) {
+        enemyUnits.add(new melee(1580, 700, 100, 100, 150, "enemy", "wizard", 1.5, 140, 40, 220));
+        lastTime = millis();
+        enemyPop++;
+      }
+    } else {
+      int index = (int) (Math.random() * 3);
+      if (index == 0) {
+        enemyUnits.add(new melee(1470, 700, 120, 120, 150, "enemy", "spider", 2.5, 150, 20, 120));
+        lastTime = millis();
+        enemyPop++;
+      }
+      if (index == 1) {
+        enemyUnits.add(new melee(1480, 700, 100, 100, 150, "enemy", "robot", 1.5, 235, 30, 150));
+        lastTime = millis();
+        enemyPop++;
+      }
+      if (index == 2) {
+        enemyUnits.add(new melee(1580, 700, 100, 100, 150, "enemy", "alien", 1.5, 350, 40, 200));
+        lastTime = millis();
+        enemyPop++;
+      }
     }
   }
 }
@@ -168,7 +187,7 @@ void mousePressed() {
     }
     if (mouseX <= 360 && mouseX >= 285 && mouseY <= 95 && mouseY >= 20) {
       if (population < 10 && gold >= 800) {
-        playerUnits.add(new melee(350, 650, 150, 150, 150, "player", "thanos", 1, 9999, 100, 800));
+        playerUnits.add(new melee(350, 600, 150, 200, 150, "player", "thanos", 1, 9999, 100, 800));
         population++;
         gold -= 800;
       }
@@ -182,6 +201,9 @@ void mousePressed() {
       icons.add(new icon(200, 20, 75, 75, "alienIcon", 2));
       icons.add(new icon(285, 20, 75, 75, "thanosIcon", 3));
       icons.add(new icon(600, 20, 75, 75, "arrow", 4));
+      background1 = loadImage("background2");
+      background1.resize(1800, 1000);
+      experience -= 1000;
     }
     level = 2;
   }
