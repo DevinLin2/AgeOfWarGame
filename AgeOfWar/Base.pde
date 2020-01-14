@@ -35,7 +35,13 @@ class base {
       //rect(x, y, 10, 10);
       // following code is for health bar
       noStroke();
-      fill(255,0,0);
+      if (currentHealth >= healthTotal / 3 * 2) {
+        fill(90, 255, 90);
+      } else if (currentHealth >= healthTotal / 3) {
+        fill(255, 255, 52);
+      } else {
+        fill(255, 51, 51);
+      }
       rect(x - 490, y + 510, drawWidth, 20);
       // Outline
       stroke(0);
@@ -45,7 +51,13 @@ class base {
       image(img, x, y, w, h);
       // following code is for health bar
       noStroke();
-      fill(255,0,0);
+      if (currentHealth >= healthTotal / 3 * 2) {
+        fill(90, 255, 90);
+      } else if (currentHealth >= healthTotal / 3) {
+        fill(255, 255, 52);
+      } else {
+        fill(255, 51, 51);
+      }
       rect(x - 10, y + 510, drawWidth, 20);
       // Outline
       stroke(0);

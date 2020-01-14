@@ -5,6 +5,7 @@ class melee {
   PImage img;
   boolean isAttacking;
   String party, imgName;
+  int index;
 
   melee(float xPos, float yPos, float wid, float hei, float r, String p, String name, float speed, float hp, float d) {
     x = xPos;
@@ -20,6 +21,7 @@ class melee {
     isAttacking = false;
     currentHealth = healthTotal;
     damage = d;
+    index = -1;
   }
 
   float getX() {
@@ -33,16 +35,32 @@ class melee {
   float getHealth() {
     return currentHealth;
   }
-
+  
+  float getWidth() {
+    return w;
+  }
+  
   void setHealth(float newHP) {
     currentHealth = newHP;
+  }
+  
+  void setIndex(int newIndex) {
+    index = newIndex;
   }
 
   void move() {
     if (party.equals("player") && isAttacking == false) {
-      x += xVel;
+      if (index != 0 && dist(playerUnits.get(index - 1).getX(), playerUnits.get(index - 1).getY(), x, y) >= playerUnits.get(index - 1).getWidth() + 10) {
+        x += xVel;
+      } else if (index == 0) {
+        x += xVel;
+      }
     } else if (isAttacking == false) {
-      x -= xVel;
+      if (index != 0 && dist(enemyUnits.get(index - 1).getX(), enemyUnits.get(index - 1).getY(), x, y) >= enemyUnits.get(index - 1).getWidth() + 10) {
+        x -= xVel;
+      } else if (index == 0) {
+        x -= xVel;
+      }
     }
   }
 
@@ -53,7 +71,13 @@ class melee {
       image(img, -x, y, w, h);
       scale(-1.0, 1.0);
       noStroke();
-      fill(255, 0, 0);
+      if (currentHealth >= healthTotal / 3 * 2) {
+        fill(90, 255, 90);
+      } else if (currentHealth >= healthTotal / 3) {
+        fill(255, 255, 52);
+      } else {
+        fill(255, 51, 51);
+      }
       rect(x - 3 * w / 4, y - 10, drawWidth / 2, 10);
       // Outline
       stroke(0);
@@ -62,7 +86,13 @@ class melee {
     } else {
       image(img, x, y, w, h);
       noStroke();
-      fill(255, 0, 0);
+      if (currentHealth >= healthTotal / 3 * 2) {
+        fill(90, 255, 90);
+      } else if (currentHealth >= healthTotal / 3) {
+        fill(255, 255, 52);
+      } else {
+        fill(255, 51, 51);
+      }
       rect(x + w / 4, y - 10, drawWidth / 2, 10);
       // Outline
       stroke(0);

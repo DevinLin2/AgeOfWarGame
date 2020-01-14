@@ -27,6 +27,8 @@ void initialize() {
   // this is test code
   playerUnits.add(new melee(500, 300, 200, 150, 100, "player", "dragon", 5, 100, 10));
   enemyUnits.add(new melee(1300, 300, 200, 150, 100, "enemy", "dragon", 5, 100, 10));
+  playerUnits.add(new melee(200, 300, 200, 150, 100, "player", "dragon", 5, 100, 10));
+  enemyUnits.add(new melee(1600, 300, 200, 150, 100, "enemy", "dragon", 5, 100, 10));
 }
 
 void draw() {
@@ -41,6 +43,7 @@ void draw() {
     bases.get(i).display();
   }
   for (int i = 0; i < playerUnits.size(); i++) {
+    playerUnits.get(i).setIndex(i);
     playerUnits.get(i).display();
     playerUnits.get(i).move();
     playerUnits.get(i).attack();
@@ -50,6 +53,7 @@ void draw() {
     }
   }
   for (int i = 0; i < enemyUnits.size(); i++) {
+    enemyUnits.get(i).setIndex(i);
     enemyUnits.get(i).display();
     enemyUnits.get(i).move();
     enemyUnits.get(i).attack();
