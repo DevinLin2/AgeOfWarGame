@@ -29,10 +29,9 @@ class base {
   void display() {
     float drawWidth = (currentHealth / healthTotal) * w; // this scales the current healthbar to the width of the base
     if (party.equals("player") && imgName.equals("base1")) { // flipping the image on the y axis
-      pushMatrix();
       scale(-1.0, 1.0);
       image(img, -x, y, w, h);
-      popMatrix();
+      scale(-1.0, 1.0);
       //rect(x, y, 10, 10);
       // following code is for health bar
       noStroke();

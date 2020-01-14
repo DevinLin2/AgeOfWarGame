@@ -2,7 +2,9 @@ import java.util.*;
 
 int level, experience, playerHealth, enemyHealth;
 ArrayList<base> bases;
-ArrayList<melee> meleeUnits;
+ArrayList<melee> playerUnits;
+ArrayList<melee> enemyUnits;
+PImage background1, toolBar;
 
 void setup() {
   frameRate(20);
@@ -11,24 +13,25 @@ void setup() {
 }
 
 void initialize() {
+  background1 = loadImage("medievalBackground");
+  toolBar = loadImage("toolBar");
+  background1.resize(1800,1000);
   level = 1;
   experience = 0;
   bases = new ArrayList<base>();
+  playerUnits = new ArrayList<melee>();
+  enemyUnits = new ArrayList<melee>();
   bases.add(new base(500, 300, 500, 500, "player", "base1", 1000)); // players home base
   bases.add(new base(1300, 300, 500, 500, "enemy", "base1", 1000)); // enemy base
   
   // this is test code
-  meleeUnits = new ArrayList<melee>();
-  meleeUnits.add(new melee(500, 300, 200, 150, 10, "player", "dragon"));
-  meleeUnits.add(new melee(1300, 300, 200, 150, 10, "enemy", "dragon"));
+  playerUnits.add(new melee(500, 300, 200, 150, 100, "player", "dragon", 5, 100, 5));
+  enemyUnits.add(new melee(1300, 300, 200, 150, 100, "enemy", "dragon", 5, 100, 5));
 }
 
 void draw() {
   println(frameRate);
-  PImage background1 = loadImage("medievalBackground");
-  PImage toolBar = loadImage("toolBar");
-  background1.resize(1800,1000);
-  //background(background1);
+  background(background1);
   
   // all draw code goes under this
 
@@ -37,8 +40,14 @@ void draw() {
   for (int i = 0 ; i < bases.size(); i++) {
     bases.get(i).display();
   }
-  for (int i = 0; i < meleeUnits.size(); i++) {
-    meleeUnits.get(i).display();
-    meleeUnits.get(i).move();
+  for (int i = 0; i < playerUnits.size(); i++) {
+    playerUnits.get(i).display();
+    playerUnits.get(i).move();
+    playerUnits.get(i).attack();
+  }
+  for (int i = 0; i < playerUnits.size(); i++) {
+    enemyUnits.get(i).display();
+    enemyUnits.get(i).move();
+    enemyUnits.get(i).attack();
   }
 }
