@@ -1,4 +1,5 @@
 import java.util.*;
+import processing.sound.*;
 
 int level, experience, population, gold, enemyPop;
 ArrayList<base> bases;
@@ -10,11 +11,15 @@ float playerHealth, enemyHealth;
 long lastTime;
 String gameState;
 PFont font;
+Sound s;
+SoundFile file;
 
 void setup() {
   frameRate(20);
   size(1800, 1000);
   initialize();
+  file = new SoundFile(this, "song");
+  file.loop();
 }
 
 void initialize() {
@@ -188,7 +193,7 @@ void draw() {
 void mousePressed() {
   if (gameState.equals("start")) {
     gameState = "game";
-  } else if (gameState == "game"){
+  } else if (gameState == "game") {
     if (level == 1) {
       if (mouseX <= 105 && mouseX >= 30 && mouseY <= 95 && mouseY >= 20) {
         if (population < 10 && gold >= 140) {
