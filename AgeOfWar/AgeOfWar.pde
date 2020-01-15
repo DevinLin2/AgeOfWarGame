@@ -74,6 +74,21 @@ void draw() {
     for (int i = 0; i < icons.size(); i++) {
       icons.get(i).display();
     }
+    if (level == 1) {
+      fill(255);
+      text(140, 30, 40);
+      fill(0);
+      text(110, 115, 40);
+      fill(255);
+      text(500, 200, 40);
+      text(220, 285, 40);
+    } else {
+      fill(255);
+      text(120, 30, 40);
+      text(150, 115, 40);
+      text(200, 200, 40);
+      text(800, 285, 40);
+    }
     for (int i = 0; i < bases.size(); i++) {
       bases.get(i).display();
       if (i == 0 && playerHealth <= 0) {
