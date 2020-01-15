@@ -123,11 +123,11 @@ void draw() {
       enemyUnits.get(i).attack();
       enemyUnits.get(i).attackBase();
       if (enemyUnits.get(i).getHealth() <= 0) {
-        enemyUnits.remove(i);
         experience += 100;
-        gold += enemyUnits.get(i).getCost();
+        gold += enemyUnits.get(i).getCost() + 100;
         playerUnits.get(0).changeIsAttacking();
         enemyPop--;
+        enemyUnits.remove(i);
       }
     }
     if (millis() - lastTime >= 8000 && enemyPop < 5) {
