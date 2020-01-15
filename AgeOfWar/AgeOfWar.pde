@@ -130,7 +130,7 @@ void draw() {
         enemyUnits.remove(i);
       }
     }
-    if (millis() - lastTime >= 8000 && enemyPop < 5) {
+    if (millis() - lastTime >= 8000 && enemyPop < 3) {
       if (level == 1) {
         int index = (int) (Math.random() * 4);
         if (index == 0) {
@@ -182,8 +182,8 @@ void draw() {
     fill(255);
     background(spaceBackground);   
     textFont(font);
-    text("You succeeded in thwarting Dr. Strange’s plans. You obtained the", 145, 300);
-    text("final infinity stone and placed it onto your infinity gauntlet.", 145, 400);
+    text("You succeed in thwarting Dr. Strange’s plans. You obtain the", 145, 300);
+    text("final infinity stone and place it onto your infinity gauntlet.", 145, 400);
     text("With the power of the stones, you snap your fingers and half of the", 145, 500);
     text("universe is instantly eradicated. You hop on your ship, wipe the", 145, 600);
     text("sweat off your face, and fly off into the distance. Congratulations!", 145, 700);
